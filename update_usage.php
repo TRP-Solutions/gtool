@@ -44,13 +44,15 @@ else {
 	Ufo::call('alert','No output');
 }
 
+$html = new healDocument();
 if($undefined) {
-	$html = new healDocument();
 	foreach($undefined as $key => $undef) {
 		$html->te('Unknown msgid: '.$key)->el('br');
 		$html->te('Files: '.implode(', ',$undef))->el('br');
 		$html->el('br');
 	}
-	
-	Ufo::output('output',$html);
 }
+else {
+	$html->te('Done')->el('br');
+}
+Ufo::output('output',$html);
