@@ -1,0 +1,105 @@
+/*
+White: #FFFFFF
+SkyBlue: #B9E0F7
+Current Intel Orange: #F58426
+Corange: #EF4423
+Navy Gulf: #182E3A
+*/
+
+body {
+	background-color:#F58426;
+	font-family:Arial;
+	font-size:14px;
+	font-weight: bold;
+	line-height:14px;
+	color: #182E3A;
+}
+
+wrapper {
+	background-color:#B9E0F7;
+	position:absolute;
+	width:800px;
+	margin-left:-405px;
+	top:0px;
+	bottom:0px;
+	left:50%;
+	display: block;
+	border: 5px solid #EF4423;
+	border-right: 5px solid #EF4423;
+}
+
+main {
+	position: absolute;
+	top: 50px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	display: block;
+	padding: 10px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+nav {
+	padding: 10px;
+	border-bottom: 5px solid #EF4423;
+}
+
+dialog {
+	display: none;
+	position: absolute;
+	top: 50px;
+	right: 150px;
+	left: 150px;
+	bottom: 50px;
+	background-color:#B9E0F7;
+	border: 5px solid #EF4423;
+	padding: 10px;
+	box-shadow: 0px 0px 80px #182E3A;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+label {
+	display: inline-block;
+	width: 100px;
+	vertical-align:top;
+}
+
+button, input, textarea, select {
+  -webkit-appearance: none;
+  border-radius: 2px;
+	border: 0px solid black;
+	background-color: #FFFFFF;
+	font-size:inherit;
+	line-height:inherit;
+	color: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+	margin: 2px;
+	padding: 2px 5px 2px 5px;
+}
+
+textarea {
+	width: 350px;
+	height: 69px;
+}
+
+table.data {
+	width: 100%;
+	border-bottom: 3px solid #EF4423;
+}
+table.data tr:nth-child(even) td {
+	background: rgba(255,255,255,0.5);
+}
+table.data tr.clickable:hover td, button:hover, input:hover, textarea:hover {
+	background: #182E3A;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+table.data td, table.data th {
+	padding: 2px 4px 2px 4px; 
+}
+table.data th {
+	border-bottom: 3px solid #EF4423;
+}
