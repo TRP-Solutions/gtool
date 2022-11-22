@@ -24,9 +24,15 @@ function make_po($locale,$output) {
 		ORDER BY `msgid`.`msgid`";
 	$query = $mysqli->query($sql);
 	while($rs = $query->fetch_object()) {
-		$str = !empty($rs->local) ? $rs->local : $rs->backup;
+		if(!empty($rs->local)) {
+			$str = $rs->local;
+		}
+		else {
+			$str = $rs->backup;
+			$output->te('!!! Filled from primary: '.$rs->msgid)->el('br');
+		}
 		$file .= 'msgid "'.$rs->msgid.'"'.PHP_EOL;
-		$file .= 'msgstr "'.str_replace('"','""',$rs->local).'"'.PHP_EOL.PHP_EOL;
+		$file .= 'msgstr "'.str_replace('"','""',$str).'"'.PHP_EOL.PHP_EOL;
 	}
 
 	$file_po = tempnam(sys_get_temp_dir(), 'gtoolpo_');
