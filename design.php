@@ -56,12 +56,12 @@ trait htmlDesignNodeParent {
 		$hidden = $this->el('input',['type'=>'hidden','name'=>$name,'value'=>$value]);
 		return $hidden;
 	}
-	public function textarea($name, $content = '') {
+	public function textarea($name, $content = ''){
 		$textarea = $this->el('textarea',['id'=>$name,'name'=>$name]);
 		$textarea->te($content);
 		return $textarea;
 	}
-	public function file($name, $multiple = false) {
+	public function file($name, $multiple = false){
 		$input = $this->el('input',['type'=>'file','id'=>$name]);
 		if($multiple) {
 			$input->at(['multiple','name'=>$name.'[]']);
@@ -71,13 +71,7 @@ trait htmlDesignNodeParent {
 		}
 		return $input;
 	}
-	public function el($name, $attributes = [], $append = false){
-		$element = static::createDesignElement($name);
-		$this->appendChild($element);
-		$element->at($attributes,$append);
-		return $element;
-	}
-	protected static function createDesignElement($name){
+	protected static function createElementHeal($name){
 		return new htmlDesignElement($name);
 	}
 }
