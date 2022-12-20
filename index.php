@@ -3,11 +3,12 @@ require_once __DIR__.'/header.php';
 
 $doc = new htmlDesign('html');
 $html = $doc->el('html');
-$html->el('title')->te(TITLE);
-$html->el('link',['rel'=>'stylesheet','href'=>'css/reset.css']);
-$html->el('link',['rel'=>'stylesheet','href'=>'css/style.css']);
-$html->el('script',['src'=>'lib/ufo-ajax/ufo.js']);
-$html->el('script',['src'=>'onload.js']);
+$head = $html->el('head');
+$head->el('title')->te(TITLE);
+$head->el('link',['rel'=>'stylesheet','href'=>'css/reset.css']);
+$head->el('link',['rel'=>'stylesheet','href'=>'css/style.css']);
+$head->el('script',['src'=>'lib/ufo-ajax/ufo.js']);
+$head->el('script',['src'=>'onload.js']);
 
 $onload = "bodyload();Ufo.get('main','search.php');";
 $body = $html->el('body',['onload'=>$onload]);
