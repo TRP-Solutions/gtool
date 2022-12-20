@@ -7,7 +7,9 @@ $form = $html->form(null);
 foreach(LOCALES as $value) {
 	$form->label($value.': ');
 	$onclick = "location.href='download.script.php?locale=$value'";
-	$form->button('Download CSV',$onclick);
+	$form->button('Download CSV (current)',$onclick);
+	$onclick = "location.href='download.script.php?locale=$value&fill'";
+	$form->button('Download CSV (fill)',$onclick);
 	$form->el('br');
 }
 
