@@ -34,13 +34,13 @@ if($locale) {
 						}
 					}
 					else {
-						if($msgstr) {
-							$output->te('Unknown code found('.$count.'): '.$msgid)->el('br');
+						if($msgid) {
+							$output->te('Unknown msgid found:'.$count.' '.$msgid)->el('br');
 						}
 					}
 				}
 				else {
-					$output->te('Separator invalid('.$count.'): '.$line)->el('br');
+					$output->te('Separator invalid:'.$count.' '.$line)->el('br');
 				}
 			}
 			$count++;
