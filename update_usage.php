@@ -10,6 +10,7 @@ $exec .= ' --omit-header';
 $exec .= ' --sort-output';
 $exec .= ' --keyword=lnr';
 $exec .= ' --keyword=ln';
+$exec .= ' --from-code=UTF-8';
 $exec .= ' --output=-';
 $exec .= ' $(find . | grep -v "\.svn" | grep -e "\.php" -e "\.js")';
 
