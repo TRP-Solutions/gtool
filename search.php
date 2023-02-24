@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$html = new htmlDesign();
+$html = new healDocument();
 
 $primary = LOCALES[0];
 if(!empty($_GET['local'])) {

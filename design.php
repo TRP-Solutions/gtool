@@ -1,14 +1,14 @@
 <?php
-trait htmlDesignNodeParent {
-	public function button($value, $onclick) {
-		$input = $this->el('input',['type'=>'button','value'=>$value]);
+class Design extends HealPlugin {
+	public static function button($parent, $value, $onclick) {
+		$input = $parent->el('input',['type'=>'button','value'=>$value]);
 		if($onclick) {
 			$input->at(['onclick'=>$onclick]);
 		}
 		return $input;
 	}
-	public function form($action = null, $method = 'get'){
-		$form = $this->el('form');
+	public static function form($parent, $action = null, $method = 'get'){
+		$form = $parent->el('form');
 		if(!empty($action)){
 			$form->at(['action'=>$action,'method'=>$method]);
 		} else {
@@ -16,29 +16,29 @@ trait htmlDesignNodeParent {
 		}
 		return $form;
 	}
-	public function label($text = '', $for = null){
-		$label = $this->el('label');
+	public static function label($parent, $text = '', $for = null){
+		$label = $parent->el('label');
 		$label->te($text);
 		if(!is_null($for))
 			$label->at(['for'=>$for]);
 		return $label;
 	}
-	public function input($name, $id = null, $value = null){
-		$input = $this->el('input',['name'=>$name]);
+	public static function input($parent, $name, $id = null, $value = null){
+		$input = $parent->el('input',['name'=>$name]);
 		if(!is_null($id))
 			$input->at(['id'=>$id]);
 		if(!is_null($value))
 			$input->at(['value'=>$value]);
 		return $input;
 	}
-	public function select($name, $id = null){
-		$select = $this->el('select',['name'=>$name]);
+	public static function select($parent, $name, $id = null){
+		$select = $parent->el('select',['name'=>$name]);
 		if(!is_null($id))
 			$select->at(['id'=>$id]);
 		return $select;
 	}
-	public function option($text, $value = null, $selected = false){
-		$option = $this->el('option');
+	public static function option($parent, $text, $value = null, $selected = false){
+		$option = $parent->el('option');
 		$option->te($text);
 		if(!is_null($value))
 			$option->at(['value'=>$value]);
@@ -46,23 +46,23 @@ trait htmlDesignNodeParent {
 			$option->at(['selected']);
 		return $option;
 	}
-	public function submit($value = null){
-		$submit = $this->el('input',['type'=>'submit']);
+	public static function submit($parent, $value = null){
+		$submit = $parent->el('input',['type'=>'submit']);
 		if(!is_null($value))
 			$submit->at(['value'=>$value]);
 		return $submit;
 	}
-	public function hidden($name, $value){
-		$hidden = $this->el('input',['type'=>'hidden','name'=>$name,'value'=>$value]);
+	public static function hidden($parent, $name, $value){
+		$hidden = $parent->el('input',['type'=>'hidden','name'=>$name,'value'=>$value]);
 		return $hidden;
 	}
-	public function textarea($name, $content = ''){
-		$textarea = $this->el('textarea',['id'=>$name,'name'=>$name]);
+	public static function textarea($parent, $name, $content = ''){
+		$textarea = $parent->el('textarea',['id'=>$name,'name'=>$name]);
 		$textarea->te($content);
 		return $textarea;
 	}
-	public function file($name, $multiple = false){
-		$input = $this->el('input',['type'=>'file','id'=>$name]);
+	public static function file($parent, $name, $multiple = false){
+		$input = $parent->el('input',['type'=>'file','id'=>$name]);
 		if($multiple) {
 			$input->at(['multiple','name'=>$name.'[]']);
 		}
@@ -71,15 +71,6 @@ trait htmlDesignNodeParent {
 		}
 		return $input;
 	}
-	protected static function createElementHeal($name){
-		return new htmlDesignElement($name);
-	}
 }
 
-class htmlDesign extends HealDocument {
-	use htmlDesignNodeParent;
-}
-
-class htmlDesignElement extends HealElement {
-	use htmlDesignNodeParent;
-}
+HealDocument::register_plugin('Design');

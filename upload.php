@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$html = new htmlDesign();
+$html = new healDocument();
 $form = $html->form(null);
 $form->at(['enctype'=>'multipart/form-data']);
 $onsubmit = "Ufo.post('main','upload.script.php',this);return false;";

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$html = new htmlDesign();
+$html = new healDocument();
 $form = $html->form(null);
 $onsubmit = "Ufo.post('dialog','entry_new.script.php',this);return false;";
 $form->at(['onsubmit'=>$onsubmit]);

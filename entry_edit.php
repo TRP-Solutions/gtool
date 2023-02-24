@@ -20,7 +20,7 @@ $sql = "SELECT `msgid`,`usage`,$field
 $query = $mysqli->query($sql);
 $rs = $query->fetch_object();
 
-$html = new htmlDesign();
+$html = new healDocument();
 $form = $html->form(null);
 $onsubmit = "Ufo.post('dialog','entry_edit.script.php',this);return false;";
 $form->at(['onsubmit'=>$onsubmit]);

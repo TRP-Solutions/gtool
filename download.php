@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$html = new htmlDesign();
+$html = new healDocument();
 $form = $html->form(null);
 
 foreach(LOCALES as $value) {

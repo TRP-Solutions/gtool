@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$html = new htmlDesign();
+$html = new healDocument();
 $form = $html->form(null);
 $form->button('Update usage',"Ufo.get('action','update_usage.php')");
 $form->button('Update PO/MO',"Ufo.get('action','update_pomo.php')");

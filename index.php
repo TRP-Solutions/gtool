@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$doc = new htmlDesign('html');
+$doc = new healDocument('html');
 $html = $doc->el('html');
 $head = $html->el('head');
 $head->el('meta',['charset'=>'utf-8']);
