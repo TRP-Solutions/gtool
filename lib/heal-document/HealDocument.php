@@ -13,6 +13,7 @@ trait HealNodeParent {
 	}
 
 	public function te($str, $break_on_newline = false) : HealComponent {
+		if(!isset($str)) return $this;
 		if($break_on_newline){
 			$lines = explode("\n",$str);
 			$firstline = true;
@@ -58,7 +59,7 @@ trait HealNodeParent {
 	}
 }
 
-class HealDocument extends DOMDocument {
+class HealDocument extends DOMDocument implements HealComponent {
 	use HealNodeParent;
 
 	private static $plugins = [], $plugin_name_cache = [], $has_prefixed_plugins = false;
@@ -86,6 +87,10 @@ class HealDocument extends DOMDocument {
 		} else {
 			return $this->saveXML();
 		}
+	}
+
+	public function at($values, $append = false) : HealComponent {
+		throw new \Exception("Not Supported");
 	}
 
 	public static function register_plugin($classname, $prefix = null){
