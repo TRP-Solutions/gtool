@@ -10,5 +10,6 @@ CREATE TABLE `msgstr` (
 	`msgid_id` int(10) unsigned NOT NULL,
 	`locale` varchar(5) NOT NULL,
 	`str` text NOT NULL,
-	PRIMARY KEY (`msgid_id`,`locale`)
+	PRIMARY KEY (`msgid_id`,`locale`),
+	FOREIGN KEY (`msgid_id`) REFERENCES `msgid` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

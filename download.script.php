@@ -6,11 +6,18 @@ $locale = $mysqli->real_escape_string($_GET['locale']);
 $primary = LOCALES[0];
 $fill = (bool) isset($_GET['fill']);
 
+if($fill) {
+	$where = "`msgstr`.`str` IS NULL OR `msgstr`.`str` = ''";
+}
+else {
+	$where = "`msgstr`.`str` IS NOT NULL AND `msgstr`.`str` != ''";
+}
+
 $sql = "SELECT `msgid`.`msgid`,`msgstr`.`str`,fill.`str` as fill
 	FROM `msgid`
 	LEFT JOIN `msgstr` ON `msgid`.`id` = `msgstr`.`msgid_id` AND `msgstr`.`locale` = '$locale'
 	LEFT JOIN `msgstr` as fill ON `msgid`.`id` = `fill`.`msgid_id` AND `fill`.`locale` = '$primary'
-	WHERE `msgstr`.`str` IS NULL OR `msgstr`.`str` = ''
+	WHERE $where
 	ORDER BY `msgid`.`id`";
 $query = $mysqli->query($sql);
 
