@@ -24,8 +24,8 @@ $query = $mysqli->query($sql);
 $out = '';
 
 while($rs = $query->fetch_object()) {
-	$out .= utf8_decode($rs->msgid." => ");
-	$out .= utf8_decode('"'.($fill ? $rs->fill : $rs->str).'"'.PHP_EOL);
+	$out .= $rs->msgid." => ";
+	$out .= '"'.($fill ? $rs->fill : $rs->str).'"'.PHP_EOL;
 }
 
 header('Content-type: text/plain; charset=utf-8');

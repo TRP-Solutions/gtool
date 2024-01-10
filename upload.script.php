@@ -16,7 +16,7 @@ if($locale) {
 		$count = 1;
 		
 		while(!feof($file)) {
-			$line = trim(utf8_encode(fgets($file)));
+			$line = trim(fgets($file));
 			
 			if(trim($line)) {
 				$linearray = explode(" => \"",$line);
