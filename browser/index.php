@@ -1,18 +1,15 @@
 <?php
-require_once __DIR__.'/../../header.php';
+require_once __DIR__.'/../header.php';
 
 $doc = new healDocument('html');
 $html = $doc->el('html');
 $head = $html->el('head');
 $head->el('meta',['charset'=>'utf-8']);
 $head->el('title')->te(TITLE);
-$head->el('link',['rel'=>'stylesheet','href'=>'../../css/reset.css']);
-$head->el('link',['rel'=>'stylesheet','href'=>'../../css/style.css']);
-$head->el('script',['src'=>'lib/ufo-ajax/ufo.js']);
-$head->el('script',['src'=>'onload.js']);
+$head->el('link',['rel'=>'stylesheet','href'=>'../css/reset.css']);
+$head->el('link',['rel'=>'stylesheet','href'=>'../css/style.css']);
 
-$onload = "bodyload();Ufo.get('main','search.php');";
-$body = $html->el('body',['onload'=>$onload]);
+$body = $html->el('body');
 
 $wrapper = $body->el('wrapper');
 $main = $wrapper->el('main');
