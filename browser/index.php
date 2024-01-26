@@ -32,7 +32,9 @@ $body = '';
 $body .= 'Time: '.(new DateTime())->format('Y-m-d H:i').PHP_EOL;
 $body .= 'Language: '.$string.PHP_EOL;
 $body .= 'Base64: '.base64_encode($string).PHP_EOL;
-$js = "window.location = 'mailto:".rawurlencode(EMAIL)."?subject=".rawurlencode($title)."&body=".rawurlencode($body)."'";
-$main->button('E-mail',$js);
+$url = 'mailto:';
+if(defined('EMAIL')) $url .= rawurlencode(EMAIL);
+$url .= '?subject='.rawurlencode($title).'&body='.rawurlencode($body);
+$main->button('E-mail',"window.location = '".$url."'");
 
 echo $doc;
