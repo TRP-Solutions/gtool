@@ -1,23 +1,23 @@
 <?php
 require_once __DIR__.'/header.php';
 
-$exec = 'cd ';
-$exec .= PATH_SOURCE;
-$exec .= ' && ';
-$exec .= PATH_BIN.'/';
+$exec = PATH_BIN.'/';
 $exec .= 'xgettext';
 $exec .= ' --omit-header';
-$exec .= ' --sort-output';
 $exec .= ' --keyword=lnr';
 $exec .= ' --keyword=ln';
 $exec .= ' --from-code=UTF-8';
 $exec .= ' --output=-';
-$exec .= ' $(find . | grep -v "\.svn" | grep -e "\.php" -e "\.js")';
+$exec .= " $(find ".PATH_SOURCE." -name '*.js' -or -name '*.php' | grep -v ' ')";
+// Spaces in filenames unsupported by xgettext
 
-exec($exec,$output);
+exec($exec,$output,$retval);
 $undefined = [];
 
-if($output) {
+if($retval!==0) {
+	\Ufo::call('alert','Returned = '.$retval);
+}
+elseif($output) {
 	$usage = [];
 	foreach($output as $line) {
 		if(strpos($line,'#: ')===0) {
