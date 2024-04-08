@@ -15,7 +15,7 @@ trait HealNodeParent {
 	public function te($str, $break_on_newline = false) : HealComponent {
 		if(!isset($str)) return $this;
 		if($break_on_newline){
-			$lines = explode("\n",$str);
+			$lines = explode("\n",str_replace("\r",'',$str));
 			$firstline = true;
 			foreach($lines as $line){
 				if(!$firstline){
@@ -127,7 +127,7 @@ class HealDocument extends DOMDocument implements HealComponent {
 			if(!empty($prefix) && isset(self::$plugins[$prefix])){
 				$classname = self::$plugins[$prefix];
 				if($classname::can_create($name)){
-					self::$plugin_name_cache[$name] = $classname;
+					self::$plugin_name_cache[$fullname] = $classname;
 					return $classname::create($parent, $name, ...$arguments);
 				}
 			}
@@ -179,14 +179,42 @@ interface HealComponent {
 	public function fr($str) : bool;
 }
 
+abstract class HealWrapper implements HealComponent {
+	protected $primary_element;
+
+	public function el($name, $attributes = [], $append = false) : HealComponent {
+		return $this->primary_element->el($name, $attributes, $append);
+	}
+
+	public function at($values, $append = false) : HealComponent {
+		$this->primary_element->at($values, $append);
+		return $this;
+	}
+	public function te($str, $break_on_newline = false) : HealComponent {
+		$this->primary_element->te($str, $break_on_newline);
+		return $this;
+	}
+	public function co($str) : HealComponent {
+		$this->primary_element->co($str);
+		return $this;
+	}
+	public function fr($str) : bool {
+		$this->primary_element->fr($str);
+		return $this;
+	}
+	public function __call($name, $arguments){
+		return HealDocument::try_plugin($this, $name, $arguments);
+	}
+}
+
 interface HealPluginInterface {
 	public static function can_create($name) : bool;
 	public static function create($parent, $name, ...$arguments) : HealComponent;
 }
 
-abstract class HealPlugin implements HealPluginInterface, HealComponent {
+abstract class HealPlugin extends HealWrapper implements HealPluginInterface {
 	public static function can_create($name) : bool{
-		return method_exists(static::class, $name);
+		return method_exists(static::class, $name) && (new ReflectionMethod(static::class, $name))->isStatic();
 	}
 
 	public static function create($parent, $name, ...$arguments) : HealComponent {
@@ -195,28 +223,13 @@ abstract class HealPlugin implements HealPluginInterface, HealComponent {
 			if(is_a($object, static::class) && !isset($object->primary_element)){
 				$object->primary_element = $parent;
 			}
+			if(!is_a($object, 'HealComponent')){
+				throw new \Exception("HealPlugin failed to create element '$name': Returned element didn't implement HealComponent");
+			}
 			return $object;
 		} else {
 			throw new \Exception("HealPlugin failed to find method '$name'");
 		}
 	}
-
-	protected $primary_element;
-
-	public function el($name, $attributes = [], $append = false) : HealComponent {
-		return $this->primary_element->el($name, $attributes, $append);
-	}
-
-	public function at($values, $append = false) : HealComponent {
-		return $this->primary_element->at($values, $append);
-	}
-	public function te($str, $break_on_newline = false) : HealComponent {
-		return $this->primary_element->te($str, $break_on_newline);
-	}
-	public function co($str) : HealComponent {
-		return $this->primary_element->co($str);
-	}
-	public function fr($str) : bool {
-		return $this->primary_element->fr($str);
-	}
 }
+
