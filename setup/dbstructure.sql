@@ -4,7 +4,7 @@ CREATE TABLE `msgid` (
 	`usage` text NOT NULL DEFAULT '',
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `msgid` (`msgid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 CREATE TABLE `msgstr` (
 	`msgid_id` int(10) unsigned NOT NULL,
@@ -12,4 +12,4 @@ CREATE TABLE `msgstr` (
 	`str` text NOT NULL,
 	PRIMARY KEY (`msgid_id`,`locale`),
 	FOREIGN KEY (`msgid_id`) REFERENCES `msgid` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
