@@ -4,8 +4,6 @@ require_once __DIR__.'/header.php';
 $exec = PATH_BIN.'/';
 $exec .= 'xgettext';
 $exec .= ' --omit-header';
-$exec .= ' --keyword=lnr';
-$exec .= ' --keyword=ln';
 $exec .= ' --from-code=UTF-8';
 $exec .= ' --output=-';
 $exec .= " $(find ".PATH_SOURCE." -name '*.js' -or -name '*.php' | grep -v ' ')";
